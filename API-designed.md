@@ -79,3 +79,13 @@ slider->setValue(13);
 slider->setObjectName("volume");
 ```
 **【译注】：在有IDE的自动提示的支持下，后者写起来非常方便，而前者还需要看相应的文档。**
+
+
+#### 7.2 bool 参数的陷阱
+布尔类型的参数总是带来无法阅读的代码。给现有的函数增加一个bool型的参数几乎永远是一种错误的行为。
+> widget->repaint(false); <!--？ what are you doing ？ -->
+
+这样则好得多
+> widget->repaint();
+> widget->repaintWithoutErasing();
+
