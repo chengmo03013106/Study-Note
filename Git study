@@ -1,0 +1,70 @@
+教学笔记
+ 一、初始化
+首先，让我们创建一个项目目录，并进入该目录。
+
+$ mkdir git-demo-project
+$ cd git-demo-project
+我们打算对该项目进行版本管理，第一件事就是使用git init命令，进行初始化。
+
+$ git init
+git init命令只做一件事，就是在项目根目录下创建一个.git子目录，用来保存版本信息。
+
+$ ls .git
+生成一些子目录 
+
+二、保存对象
+$ touch text.txt
+$ git hash-object -w test.txt
+
+e69de29bb2d1d6434b8b29ae775ad8c2e48c5391		40位hash，前两位是目录名
+提交文件修改，hash值会变
+
+
+三、暂存区
+文件保存成二进制对象以后，还需要通知 Git 哪些文件发生了变动。所有变动的文件，Git 都记录在一个区域，叫做"暂存区"（英文叫做 index 或者 stage）。等到变动告一段落，再统一把暂存区里面的文件写入正式的版本历史。
+git update-index命令用于在暂存区记录一个发生变动的文件。
+
+四、git add 命令
+git add = 保存对象和更新暂存区
+git add --all
+
+五、commit 的概念
+一次commit，Git生成一次快照
+
+六、git commit 提交
+git commit -m "message log"
+
+另外
+git checkout命令用于切换到某个快照。
+$ git checkout c9053865e9dff393fd2f7a92a18f9bd7f2caa7fa
+
+
+git show命令用于展示某个快照的所有代码变动。
+$ git show c9053865e9dff393fd2f7a92a18f9bd7f2caa7fa
+
+七、
+git log命令只显示当前分支的变动，虽然我们前面已经提交了快照，但是还没有记录这个快照属于哪个分支
+
+
+git branch 创建分支
+所谓分支（branch）就是指向某个快照的指针，分支名就是指针名。哈希值是无法记忆的，分支使得用户可以为快照起别名。而且，分支会自动更新，如果当前分支有新的快照，指针就会自动指向它。比如，master 分支就是有一个叫做 master 指针，它指向的快照就是 master 分支的当前快照。
+如下所示
+snapshot1		snapshot2		snapshot3			snapshot4		snapshot5		snapshot6
+						^											^										^
+						branch1									branch2								master
+
+新建快照，就是新建一个指针，指向当前快照
+
+HEAD， 总是指向当前分支的最近一次快照。
+
+
+git rm files
+
+
+git branch --remote	查看远程
+f 把本地提交到远程服务器
+
+
+git push origin chengmo_dev:dev
+
+git checkout <filename>
