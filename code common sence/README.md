@@ -36,6 +36,12 @@ reinterpret_cast:仅仅重新解释类型，但没有进行二进制的转换,�
 #define CLIENT_TYPE_OBUF_COUNT 3 
 ```
 
+## C++中尽量使用static_cast,dynamic_cast符号
+dynamic_cast 可以预防基类子类指针转换失败的情况
+如果转换失败，返回NULL，而非强制转换，可以预防错误发生
+
+
+
 **枚举** 使用前缀:
 ```
 enum conn_states {
