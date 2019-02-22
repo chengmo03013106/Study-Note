@@ -12,8 +12,8 @@ thread_test.cpp:
 2. "optimizing_cpp.pdf" note:  
   Compiler will not do this, manual write codes like    
   <code>
-  int res = a+b+c+d;<br>    
-  int res = (a+b)+(c+d);<br>  
+  int res = a+b+c+d;
+  int res = (a+b)+(c+d);
   </code>
   for out order with processors flow      
   declare variable in the function because of stack ( data is mirrored in Level 1 cache)    
