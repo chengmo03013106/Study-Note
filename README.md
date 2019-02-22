@@ -3,7 +3,7 @@ To record nodes of studying
 
 简单技巧： 
 
-1.if (N & N-1) == 0， 则N一定是2的 n次幂  
+1.'if (N & N-1) == 0' 则N一定是2的 n次幂  
 thread_test.cpp:  
   多进程通信的方式之一，如果子进程退出，父进程得知子进程退出。  
   如果子进程没有退出，为了防止父进程中 wait() 一直阻塞，定时循环fork()出一个undefined子进程，立刻exit()  
@@ -11,7 +11,7 @@ thread_test.cpp:
   
 2. "optimizing_cpp.pdf" note:  
   Compiler will not do this, manual write codes like    
-  '''
+  '''c
   int res = a+b+c+d;    
   int res = (a+b)+(c+d);  
   '''
@@ -29,7 +29,7 @@ thread_test.cpp:
   
   volatile can changed by other thread.  
   // Example 7.3. Explain volatile  
-  '''
+  '''c
   volatile int seconds; // incremented every second by another thread
   void DelayFiveSeconds() {
     seconds = 0;
@@ -54,7 +54,7 @@ static class member will be located in static memory, it should be only one, com
 unsigned vs signed integer:  
 unsigned is faster if divide a integer with a constant , it also suit for the module "%"  
 signed for convert to double.  
-'''
+'''c
 unsigned n = 15;	15/5	or 15%5 is faster.
 double c = a*2.5; a is signed is faster
 '''
