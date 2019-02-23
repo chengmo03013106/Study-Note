@@ -29,7 +29,7 @@ thread_test.cpp:
   
   volatile can changed by other thread.  
   // Example 7.3. Explain volatile  
-  '''c
+  ···c
   volatile int seconds; // incremented every second by another thread
   void DelayFiveSeconds() {
     seconds = 0;
@@ -37,7 +37,7 @@ thread_test.cpp:
       // do nothing while seconds count to 5
     }  
   }  
-  '''
+  ```
   
 "second" will not be changed if there is no volatile before it. here 'second' could be changed by other threads.  
 But it will failed to set the 'second' when other thread who want to set the value as well.  
@@ -54,10 +54,18 @@ static class member will be located in static memory, it should be only one, com
 unsigned vs signed integer:  
 unsigned is faster if divide a integer with a constant , it also suit for the module "%"  
 signed for convert to double.  
-'''c
+```c
 unsigned n = 15;	15/5	or 15%5 is faster.
 double c = a*2.5; a is signed is faster
-'''
+```
+
+integer addition, substruction, comparsion, bit operation are same time clock cycle.
+multiple is almost 10 times of clock cycle, division is 40-80 times of clock cycle.
+
+increasement and decreasement are no different except the case which in `while` and `for` case.
+`x = array[i++]` is more efficient than `x = array[++i]`, because x should wait for `i`'s value 2 clock cycle.
+`a = ++b` is more efficient than `a = b++` because compiler recognize a is equal b and store them in the same register.
+
 TODO:  
   3.template class is more efficient than a polymorphous class?    
   4. pros and cons of using class ......      
