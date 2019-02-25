@@ -75,6 +75,13 @@ more efficient than
 `if (x > 0)` better than `if (x > non-zero)`
 For the array index , The data cache is optimized for accessing arrays `forwards`, not `backwards`.
 
+### Function:
+Avoid unnecessary functions,Splitting up a function into multiple smaller functions only makes the program less efficient, it just make it clear.
+
+Using inline functions and template and define.
+
+### Function's Parameters:
+
 
 TODO:  
   3.template class is more efficient than a polymorphous class?    
