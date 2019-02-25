@@ -1,10 +1,9 @@
-Compiler will not do this, manual write codes like    
-  <code>
+Compiler will not do this, manual write codes like for out order with processors flow:    
+  ```
   int res = a+b+c+d;
   int res = (a+b)+(c+d);
-  </code>
-  for out order with processors flow      
-  declare variable in the function because of stack ( data is mirrored in Level 1 cache)    
+  ```      
+  declare variable in the ** because** of stack ( data is mirrored in Level 1 cache)    
   variable will not be free until function, except that which stored in register. To avoid this, using {} .    
   global stored in static scope. static scope used for static variable, virtual function tables, array initializer list, switch statement jump tables.  
   
