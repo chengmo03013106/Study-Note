@@ -72,8 +72,8 @@ for (i = StringLength; i > 0; i--) *(p++) |= 0x20;
 more efficient than  
 `for (x = 2.0; x > 10; x++) factorial *= x;`
 
-Comparing an integer to zero is sometimes more efficient than comparing it to any other number.
-for the array index , The data cache is optimized for accessing arrays `forwards`, not `backwards`.
+`if (x > 0)` better than `if (x > non-zero)`
+For the array index , The data cache is optimized for accessing arrays `forwards`, not `backwards`.
 
 
 TODO:  
