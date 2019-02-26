@@ -41,8 +41,8 @@ static class member will be located in static memory, it should be only one, com
 `int res = (a*b) / c , a*b will be overflow, this is not be check automatically.`  
 
 ### unsigned vs signed integer:  
-Unsigned is faster if divide a integer with a constant , it also suit for the module "%"  
-Signed is faster convert to double.  
+1.Unsigned is faster if divide a integer with a constant , it also suit for the module "%"  
+2.Signed is faster convert to double.  
 ```c
 unsigned n = 15;	15/5	or 15%5 is faster.
 double c = a*2.5; a is signed is faster
@@ -75,15 +75,57 @@ more efficient than
 `if (x > 0)` better than `if (x > non-zero)`
 For the array index , The data cache is optimized for accessing arrays `forwards`, not `backwards`.
 
-### Function:
+## Function:
 Avoid unnecessary functions,Splitting up a function into multiple smaller functions only makes the program less efficient, it just make it clear.
 
 Using inline functions and template and define.
 
 ### Function's Parameters:
+1.Simple function parameters are transferred on the stack in 32-bit systems, but in registers in
+64-bit systems.
+2.The return type of a function should preferably be a simple type, a pointer, a reference, or
+void，Returning objects of a composite type is more complex and often inefficient.
+
+### Function tail calls is more efficient:
+```c
+// Example 7.36. Tail call with return value
+  int function2(int x);
+  int function1(int y) {
+    ...
+    return function2(y+1);
+  }
+```
+
+### Class and structure:
+1.class object will take up one register which is scarely in 32bit.
+2.There is no performance penalty for organizing data into classes or structures.
+```c
+// Example 7.40
+class S2 {
+  public:
+    int a[100]; // 400 bytes. first byte at 0, last byte at 399
+    int b; // 4 bytes. first byte at 400, last byte at 403
+    int ReadB() {return b;}
+};
+
+class S3 {
+  public:    
+    int b; // 4 bytes. first byte at 400, last byte at 403
+    int ReadB() {return b;}
+    int a[100]; // 400 bytes. first byte at 0, last byte at 399        
+};
+```
+<font color=#8B008B size=3>a and b swapped is more efficient because of if the offset is not larger than 128 bytes. </font>
+<font color=#8B008B size=3>compiler can access it directly rather than using pointer.</font>
+
+static member function is faster than member function because 'this' pointer is no need.
+mk it staticed if it needn't access any un-static function or data.
+
+#  Runtime type identification (RTTI): is not efficient. 
+If the compiler has an option for RTTI then turn it off and use alternative implementations.
 
 
-TODO:  
+## TODO:  
   3.template class is more efficient than a polymorphous class?    
   4. pros and cons of using class ......      
   5. drawback of dynamic memory will be discussed later ...  
