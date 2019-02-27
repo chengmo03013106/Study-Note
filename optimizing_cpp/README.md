@@ -121,8 +121,69 @@ class S3 {
 static member function is faster than member function because 'this' pointer is no need.
 mk it staticed if it needn't access any un-static function or data.
 
-#  Runtime type identification (RTTI): is not efficient. 
+##  Runtime type identification (RTTI): is not efficient. 
 If the compiler has an option for RTTI then turn it off and use alternative implementations.
+
+## Template programming:
+```c
+// Example 7.46
+// pass m in runtime
+int Multiply (int x, int m) {
+  return x * m;
+}
+
+// Passing m in compile time.
+// To avoid m overhead, but it will make code big, per m will generated one codes of function.
+
+template <int m>
+int MultiplyBy (int x) {
+  return x * m;
+}
+
+int a, b;
+a = Multiply(10,8);			// except it is declared as inlined.
+b = MultiplyBy<8>(10);	// this one is faster because compiler recognize 10*8 earlier and replaced by (10 <<3)
+```
+
+## multi-threads optimizing:
+### Here are 4 kinds of costs to multithreading take into account.
+1. too short for the thread start and stop costs.
+2. cost of threads switch.
+3. communicated with threads, volatile is considered. to grantee the value re-read before using.
+4. storage with each threads.
+
+### others:
+1.static various should be used in thread.
+2.using thread safe function.
+
+## Exception is good in sometimes:
+it raised by hardware and it will not cost any extra time.
+```c
+float a = 1.0; b = 2.0;
+for ( int i = 0; i < 10000; i++) {	
+	try {
+		a = log(a*b);
+		a *= b;
+	}
+	except FLT_OVERFLOW{
+		a = log(a) * log(b);		// here will double call log(), log() may be the extra consuming function.
+	}
+}
+```
+
+上面的例子，省去了循环中，每次保证浮点不溢出，所以每次进行浮点比较。
+如果发现溢出异常，直接执行更好的处理，从而节约了比较的性能。
+这里干得漂亮！终于找到了异常的意义所在。
+
+Things that may need to be cleaned up include:
+> * Memory allocated with new or malloc.
+> * Handles to windows, graphic brushes, etc.
+> * Locked mutexes.
+> * Open database connections.
+> * Open files and network connections.
+> * Temporary files that need to be deleted.66
+> * User work that needs to be saved.
+> * Any other allocated resource
 
 
 ## TODO:  
