@@ -44,8 +44,9 @@ class A {
                         return *this;
                 }
 };
-test.cpp
 ```
+test.cpp
+```c
 int move_constructor() {
         cout << "-------------------------1-------------------------" << endl;
         char *tmp[3] = {"one","two","three"};
@@ -69,6 +70,5 @@ int move_constructor() {
         A d = A(1,tmp[1]);
         cout << "-------------------------6-------------------------" << endl;
         A e = std::move(a);
-```c
 
 ```
