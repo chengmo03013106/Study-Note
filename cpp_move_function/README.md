@@ -1,48 +1,52 @@
 
+Note.move constructure, std::move is supported by c++0x
+It's worked with gcc 4.4.7(CentOS 6.x) rather than gcc 4.1.2(CentOS 5.x)
+
 test.h
 ```c
 #include <iostream>
 using namespace std;
 
+
 class A {
-        public:
-                int x;
-                char * value;
-                A(int x, char * v ) : x(x) {
-                        value = new char[32];
-                        strncpy(value,v,strlen(v));
-                        cout << "Constructor" << endl;
-                }
-                ~A() {
-                        cout << "Deconstructor" << endl;
-                        delete value;
-                }
-                A(const A& a) : x(a.x) {
-                        value = new char[32];
-                        strncpy(value,a.value,strlen(a.value));
-                        cout << "Copy Constructor" << endl;
-                }
-                A& operator=(A& a) {
-                        x = a.x;
-                        value = new char[32];
-                        strncpy(value,a.value,strlen(a.value));
-                        cout << "Copy Assignment operator" << endl;
-                        return *this;
-                }
-                A(A&& a) : x(a.x) {
-                        value = NULL;
-                        value = a.value;
-                        a.value = NULL;
-                        cout << "Move Constructor" << endl;
-                }
-                A& operator=(A&& a) {
-                        x = a.x;
-                        value = NULL;
-                        value = a.value;
-                        a.value = NULL;
-                        cout << "Move Assignment operator" << endl;
-                        return *this;
-                }
+public:
+        int x;
+	char * value;
+	A(int x, char * v) : x(x) {
+		value = new char[32];
+		strncpy(value, v, strlen(v));
+		cout << "Constructor" << endl;
+	}
+	~A() {
+		cout << "Deconstructor" << endl;
+		delete value;
+	}
+	A(const A& a) : x(a.x) {
+		value = new char[32];
+		strncpy(value, a.value, strlen(a.value));
+		cout << "Copy Constructor" << endl;
+	}
+	A& operator=(A& a) {
+		x = a.x;
+		value = new char[32];
+		strncpy(value, a.value, strlen(a.value));
+		cout << "Copy Assignment operator" << endl;
+		return *this;
+	}
+	A(A&& a) : x(a.x) {
+		value = NULL;
+		value = a.value;
+		a.value = NULL;
+		cout << "Move Constructor" << endl;
+	}
+	A& operator=(A&& a) {
+		x = a.x;
+		value = NULL;
+		value = a.value;
+		a.value = NULL;
+		cout << "Move Assignment operator" << endl;
+		return *this;
+	}
 };
 ```
 test.cpp
