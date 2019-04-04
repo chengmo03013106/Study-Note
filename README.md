@@ -10,3 +10,5 @@ thread_test.cpp:
   通过上面的方式，可以激活wait()阻塞  
   
 2. optimizing_cpp.pdf 文档学习笔记 recommanded by **guangzhuwu**, thank you.
+
+3. test.awk to represent usage of awk
