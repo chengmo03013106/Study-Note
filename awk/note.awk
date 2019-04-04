@@ -1,13 +1,14 @@
-Command:
+### Command:
 `ps aux | awk '$12 ~ /-mp4|-flv|-mpegts/ { printf "%s\n",$12 }' > /opt/bee/rtmpd/html/live_streams`
 
-$12 means : the 12th column
+`$12 means : the 12th column
 ~ /xxx/ : '~' start matching here; '/xxx/': match with xxx
 !~ /xxx/ : '!~' not matching 
 printf : print format
 {} : codes block
 BEGIN{codes before exec}
-END{codes after exec}
+END{codes after exec}`
+
 
 ### awk scription example:
 
