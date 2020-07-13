@@ -71,8 +71,9 @@ int main(void) {
 //用Human指针调用asian实例
 //Asian breathe
 //Asian eat
+
 /*
-有上面的内存分布可以看出：
+通过上面的内存分布可以看出：
 1、一个类中的某个方法被声明为虚函数，则它将放在虚函数表中。
 2、当一个类继承了另一个类，就会继承它的虚函数表，虚函数表中所包含的函数，如果在子类中有重写，则指向当前重写的实现，否则指向基类实现。
 若在子类中定义了新的虚函数，则该虚函数指针在虚函数表的后面（如Human类中的breathe，在eat的后面）。
@@ -80,3 +81,69 @@ int main(void) {
 否则虽然后代类的虚函数表中有这个方法在后代类中的实现，但对祖先类指针的方法调用依然是早绑定的。
 （如用Animal指针调用Asian实例中的breathe方法，虽然在Human类中已经将breathe声明为虚函数，依然无法调用Asian类中breathe的实现，但用Human指针调用Asian实例中的breathe方法就可以）。
 */
+
+//菱形继承 
+#include <iostream>
+
+using namespace std;
+
+class Animal {
+public:
+    int name;
+    virtual void breathe() {
+        cout << "Animal breathe" << endl;
+    }
+};
+
+class LandAnimal: public Animal {
+public:
+    int numLegs;
+    virtual void run() {
+        cout << "Land animal run" << endl;
+    }
+};
+
+class Mammal: public Animal {
+public:
+    int numBreasts;
+    virtual void milk() {
+        cout << "Mammal milk" << endl;
+    }
+};
+
+class Human: public Mammal, public LandAnimal {
+public:
+    int race;
+    void milk() {
+        cout << "Human milk" << endl;
+    }
+    void run() {
+        cout << "Human run" << endl;
+    }
+    void eat() {
+        cout << "Human eat" << endl;
+    }
+};
+
+int main(void) {
+    Human human;
+
+    cout << "用LandAnimal指针调用Human实例的方法" << endl;
+    LandAnimal *laPtr = NULL;
+    laPtr = &human;
+    laPtr->run();
+
+    cout << "用Mammal指针调用Human实例的方法" << endl;
+    Mammal *mPtr = NULL;
+    mPtr = &human;
+    mPtr->milk();
+
+    cout << "用Animal指针调用Human实例的方法" << endl;
+    Animal *aPtr = NULL;
+    aPtr = &human; // error: base class "Animal" is ambiguous
+
+    return 0;
+}
+
+// 此时需要使用虚继承，用来解决菱形继承的问题
+
