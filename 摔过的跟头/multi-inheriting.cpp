@@ -146,4 +146,28 @@ int main(void) {
 }
 
 // 此时需要使用虚继承，用来解决菱形继承的问题
+class Animal {
+public:
+    int name;
+    virtual void breathe() {
+        cout << "Animal breathe" << endl;
+    }
+};
 
+class LandAnimal: virtual public Animal {
+public:
+    int numLegs;
+    virtual void run() {
+        cout << "Land animal run" << endl;
+    }
+};
+
+class Mammal: virtual public Animal {
+public:
+    int numBreasts;
+    virtual void milk() {
+        cout << "Mammal milk" << endl;
+    }
+};
+
+//当使用虚继承时，子类的实例中并不包括基类实例的一份内存，而是加了一个vbptr(虚基表 (virtual base)) 指针，避免内存中同时存在基类的共同方法而出现冲突
